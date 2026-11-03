@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SFX Networks - Private Company Portal</title>
+</head>
+<body bgcolor="#eaf4ff" text="#172554" link="#0645ad" vlink="#551a8b">
+<center>
+<table width="100%" bgcolor="#172554" cellpadding="18" cellspacing="0">
+<tr><td align="center">
+<font color="#ffffff" size="6"><b>SFX NETWORKS</b></font><br>
+<font color="#93c5fd" size="3">PRIVATE ORGANISATION PORTAL</font><br><br>
+<font color="#ffffff" size="2">RESTRICTED ACCESS - AUTHORISED EMPLOYEES ONLY</font>
+</td></tr></table>
+</center>
+<center><table width="96%" cellpadding="8"><tr><td><font color="#173e70"><b id="status" role="status"></b></font></td></tr></table></center>
+
+<main id="loginPanel">
+<center><table width="92%" bgcolor="#ffffff" cellpadding="18" cellspacing="1">
+<tr><td align="center">
+<font color="#2563eb" size="5"><b>SECURE SIGN IN</b></font>
+<p>Sign in using an account created by the SFX administrator.</p>
+<form id="loginForm">
+<table cellpadding="6"><tr><td align="right"><label for="loginUsername">Employee username</label></td><td><input id="loginUsername" autocomplete="username" required maxlength="32"></td></tr>
+<tr><td align="right"><label for="loginPassword">Private password</label></td><td><input id="loginPassword" type="password" autocomplete="current-password" required maxlength="200"></td></tr>
+<tr><td colspan="2" align="center"><button type="submit"><b>Sign in</b></button></td></tr></table>
+</form>
+<font size="2" color="#52647a">This workspace is private. Contact your administrator if you need an account.</font>
+</td></tr></table></center>
+</main>
+
+<main id="appPanel" hidden>
+<center><table width="96%" bgcolor="#ffffff" cellpadding="12" cellspacing="1">
+<tr bgcolor="#dbeafe"><td>
+<table width="100%"><tr><td><font color="#173e70" size="5"><b>SFX NETWORKS WORKSPACE</b></font><br>
+Signed in as <b id="currentUser"></b> | Role: <b id="currentRole"></b><br>
+Online now: <b id="onlineList">Loading...</b></td><td align="right"><button id="logoutButton" type="button">Sign out</button></td></tr></table>
+</td></tr>
+<tr><td align="center" bgcolor="#eef5ff">
+<button id="homeTabButton" type="button"><b>HOME</b></button>
+<button id="folderTabButton" type="button"><b>FOLDER AREA</b></button>
+</td></tr>
+<tr><td>
+<section id="homeTab">
+<table width="100%" cellpadding="10" cellspacing="8">
+<tr valign="top">
+<td width="60%" bgcolor="#f4f8ff">
+<font color="#173e70" size="4"><b>PRIVATE MESSAGES</b></font><br>
+<font size="2">Latest 20 messages are shown by default.</font><br><br>
+<label for="contactSelect">Choose a teammate</label><br><select id="contactSelect"><option value="">Choose an employee</option></select>
+<p><button id="toggleMessages" type="button">Show all messages</button> <button id="refreshContacts" type="button">Refresh people</button></p>
+<div id="messageHistory" aria-live="polite" style="height:260px;overflow:auto;background:#ffffff;border:1px solid #9bb8d8;padding:10px"></div>
+<form id="messageForm"><input id="messageInput" maxlength="5000" size="42" placeholder="Write a message..." required> <button type="submit">Send</button></form>
+</td>
+<td bgcolor="#f4f8ff">
+<font color="#173e70" size="4"><b>AUDIO & VIDEO CALLS</b></font>
+<p><font size="2">Both people must be online. Allow camera and microphone access when asked.</font></p>
+<button id="audioCallButton" type="button">Audio call</button>
+<button id="videoCallButton" type="button">Video call</button>
+<p id="callStatus">No active call.</p>
+<button id="answerCallButton" type="button" hidden>Answer</button>
+<button id="rejectCallButton" type="button" hidden>Decline</button>
+<button id="endCallButton" type="button" hidden>End call</button>
+<table width="100%" cellpadding="3"><tr><td><font size="2">YOU</font><br><video id="localVideo" autoplay muted playsinline width="100%"></video></td><td><font size="2">OTHER PERSON</font><br><video id="remoteVideo" autoplay playsinline width="100%"></video><audio id="remoteAudio" autoplay></audio></td></tr></table>
+</td></tr>
+<tr><td colspan="2">
+<section id="adminPanel" hidden>
+<table width="100%" bgcolor="#eaf2ff" cellpadding="10"><tr><td>
+<font color="#173e70" size="4"><b>ADMINISTRATION DASHBOARD</b></font><hr>
+<table width="100%" border="1" cellpadding="7" cellspacing="0" bgcolor="#ffffff"><tr bgcolor="#dbeafe"><th>Employees</th><th>Accounts</th><th>Active sessions</th><th>Messages</th><th>Files</th></tr><tr align="center"><td id="employeeCount">0</td><td id="accountCount">0</td><td id="activeSessions">0</td><td id="messageCount">0</td><td id="fileCount">0</td></tr></table>
+<h3>Create employee account</h3>
+<form id="createEmployeeForm"><label for="newUsername">New username</label><br><input id="newUsername" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.-]+"><br><br>
+<label for="newPassword">Temporary password (12+ characters)</label><br><input id="newPassword" type="password" required minlength="12" maxlength="200"><br><br><button type="submit">Create employee</button></form>
+<h3>Employee accounts</h3><button id="refreshUsers" type="button">Refresh accounts</button><ul id="userList"></ul>
+<hr><font color="#173e70" size="4"><b>ADMIN ACTIVITY LOG</b></font><br><font size="2">Latest 8 events are shown by default.</font><br><br>
+<button id="toggleAudit" type="button">Show all activity</button> <button id="refreshAudit" type="button">Refresh log</button>
+<ul id="auditList"></ul>
+</td></tr></table>
+</section>
+</td></tr>
+</table>
+</section>
+
+<section id="folderTab" hidden>
+<table width="100%" bgcolor="#f4f8ff" cellpadding="14"><tr><td>
+<font color="#173e70" size="5"><b>FOLDER AREA</b></font>
+<p>All shared files are automatically sorted into folders by file type.</p>
+<form id="uploadForm"><input id="fileInput" type="file" required> <button type="submit">Upload file</button></form>
+<p id="fileStatus" role="status"></p>
+<table width="100%" cellpadding="10" cellspacing="5"><tr><td>
+<div id="fileFolders"></div>
+<ul id="fileList"></ul>
+</td></tr></table>
+</td></tr></table>
+</section>
+</td></tr>
+</table></center>
+</main>
+<center><p><font color="#52647a" size="2">SFX Networks | Private Company Workspace</font></p></center>
+<script src="/app.js" defer></script>
+</body>
+</html>

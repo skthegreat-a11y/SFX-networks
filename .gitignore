@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.log
+
+# Private application data (never commit this)
+sfx_network.db
+sfx_network.db-shm
+sfx_network.db-wal
+.sfx_secret
+private_files/*
+!private_files/README.txt
+
+# Local environment
+.env
+.env.*
+!.env.example
